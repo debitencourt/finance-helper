@@ -28,14 +28,14 @@ export async function addTransaction(parsedTransactionsArray) {
       transaction_memo: parsedTransactionsArray.transaction.memo[index]
     }));
 
-    const { data, error } = await supabase
-      .from("transactions")
-      .insert(formattedData);
+    // const { data, error } = await supabase
+    //   .from("transactions")
+    //   .insert(formattedData);
 
-    if (error) throw error;
+    // if (error) throw error;
     
     console.log("Successfully added to database!");
-    return data;
+    // return data;
   } catch (error) {
     console.error('Failed to add transactions to database:', error);
     return [];
