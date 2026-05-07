@@ -1,3 +1,4 @@
+// Função para ler o conteúdo de um arquivo como texto
 function readFileText(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -14,6 +15,7 @@ function readFileText(file) {
   });
 }
 
+// Função para normalizar o nome do beneficiário
 function normalizeNameText(name) {
   const normalizedName = String(name ?? '').replace(/\s+/g, ' ').trim();
 
@@ -38,6 +40,7 @@ function normalizeNameText(name) {
   return normalizedName;
 }
 
+// Função para normalizar o conteúdo do arquivo OFX e extrair as transações
 function normalizeOfxText(ofxText) {
   var idMatch = [];
   var dateMatch = [];
@@ -64,6 +67,7 @@ function normalizeOfxText(ofxText) {
   return { transaction: { id: idMatch, date: dateMatch, amount: amountMatch, name: nameMatch, type: typeMatch, memo: memoMatch } };
 }
 
+// Função principal que recebe o arquivo e o trata
 export default async function ofxReader(file) {
   if (!file) {
     return [];
