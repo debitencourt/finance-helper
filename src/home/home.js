@@ -1,35 +1,27 @@
-import { useRef } from 'react';
-import ofxReader from '../components/ofx-reader';
-import { addTransaction } from '../components/supabase';
 import './home.css';
+import { useOfxTransactions } from '../hooks/useOfxTransactions';
+import Header from '../components/header/header';
 
-function Home() {
-  const fileInputRef = useRef(null);
-
-  async function handleOfxUpload(file) {
-    try {
-      const transactions = await ofxReader(file);
-      addTransaction(transactions)
-    } catch (error) {
-      console.error('Failed to parse OFX file:', error);
-    }
-  }
-
-  function addTransactionsButton() {
-    const file = fileInputRef.current.files[0];
-    if(!file) {
-      alert('Please select an OFX file to upload.');
-      return;
-    }
-    handleOfxUpload(file);
-  }
+export default function Home() {
+  const { fileInputRef, addTransactionsButton } = useOfxTransactions();
 
   return (
-    <div className="Home">
-      <input type="file" id="ofx-file" accept=".ofx" ref={fileInputRef} />
-      <button onClick={addTransactionsButton}>Add Transactions</button>
-    </div>
+    <>
+      <Header />
+      <div className="container-dashboard padding-top">
+        <div className="line um margin-auto">
+          <div className='content'></div>
+          <div className='content'></div>
+          <div className='content'></div>
+          <div className='content'></div>
+        </div>
+        <div className="line dois margin-auto">
+          <div className='content-1'></div>
+          <div className='content-2'></div>
+        </div>
+        <div className="line tres margin-auto">
+        </div>
+      </div>
+    </>
   );
 }
-
-export default Home;
